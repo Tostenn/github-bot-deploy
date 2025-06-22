@@ -1,21 +1,42 @@
 # from telegram import Update
 # from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from dotenv import load_dotenv
-import json
-import requests
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes load_dotenv
 import os
 # Chargement des variables d'environnement
 load_dotenv()
 
-
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-WEBHOOK_URL = os.getenv("WEBHOOK_URL") 
+
 CHAT_ID = '-1002870634400'
+
+'''
+definit les commandes du bot Telegram
+Ce bot permet de gérer un dépôt GitHub et d'afficher des statistiques.
+
+/start - Démarre le bot et affiche un message de bienvenue
+/help - Affiche les commandes disponibles
+/stats [repo] - Affiche les statistiques du dépôt GitHub
+/lastcommit [repo] - Affiche le dernier commit du dépôt GitHub
+
+connect ton compte GitHub avec un token personnel pour accéder aux dépôts privés
+/github [token] - Connecte ton compte GitHub avec un token personnel
+/eventLastCommit [repo] - pour etre alerté des derniers commits d'un dépôt
+'''
+
+# /start
+info_start = """Gitub Help Bot
+Ce bot permet de gérer un dépôt GitHub et d'afficher des statistiques.
+lances la commande /help pour voir les commandes disponibles.
+"""
+import json
+import requests
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+# import os
 
 # === CONFIGURATION ===
 DATA_FILE = "github_users.json"
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")  # Remplace par ton URL de webhook
 
 # === UTILITAIRES ===
 def load_data():
